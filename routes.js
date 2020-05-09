@@ -5,19 +5,24 @@ module.exports = function (app) {
 
     app.route('/')
         .get(jsonku.index);
-
+        
+    //montir
     app.route('/tampilmontir')
         .get(jsonku.tampilsemuamontir);
     app.route('/tampilmontir/:id')
         .get(jsonku.tampilsemuamontirberdasarkanid);
+    app.route('/tambahmontir')
+        .post(jsonku.tambahMontir);
+    app.route('/ubahmontir')
+        .put(jsonku.ubahMontir);
 
+    //sparepart
     app.route('/tampilsparepart')
         .get(jsonku.tampilsemuasparepart);
     app.route('/tampilsparepart/:id')
         .get(jsonku.tampilsemuasparepartberdasarkanid);
-
-    app.route('/tambahmontir')
-        .post(jsonku.tambahMontir);
     app.route('/tambahsparepart')
         .post(jsonku.tambahSparepart);
+
+
 }

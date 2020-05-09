@@ -72,18 +72,34 @@ exports.tambahMontir = function (req, res) {
 };
 
 //menambahkan data sparepart
-exports.tambahSparepart = function(req,res) {
+exports.tambahSparepart = function (req, res) {
     var nama_sparepart = req.body.nama_sparepart;
     var harga_sparepart = req.body.harga_sparepart;
     var satuan = req.body.satuan;
 
     connection.query('INSERT INTO t_sparepart (nama_sparepart, harga_sparepart, satuan) VALUES (?,?,?)',
-    [nama_sparepart,harga_sparepart,satuan],
-    function (error, rows, fields) {
-        if(error) {
-            console.log(error);
-        } else {
-            response.ok("Berhasil Menambahkan Data Sparepart!", res)
-        }
-    });
+        [nama_sparepart, harga_sparepart, satuan],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Menambahkan Data Sparepart!", res)
+            }
+        });
+};
+
+//mengubah data montir berdasarkan id
+exports.ubahMontir = function (req, res) {
+    var id = req.body.id_montir
+    var Nama_montir = req.body.Nama_montir;
+    var harga_perjam = req.body.harga_perjam;
+
+    connection.query('UPDATE t_montir SET Nama_montir=?, harga_perjam=? WHERE id_montir=?', [Nama_montir, harga_perjam, id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Ubah Data Montir!", res)
+            }
+        });
 };
