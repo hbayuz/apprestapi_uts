@@ -5,7 +5,7 @@ module.exports = function (app) {
 
     app.route('/')
         .get(jsonku.index);
-        
+
     //montir
     app.route('/tampilmontir')
         .get(jsonku.tampilsemuamontir);
@@ -23,6 +23,6 @@ module.exports = function (app) {
         .get(jsonku.tampilsemuasparepartberdasarkanid);
     app.route('/tambahsparepart')
         .post(jsonku.tambahSparepart);
-
-
+    app.route('/ubahsparepart')
+        .put(jsonku.ubahSparepart);
 }
