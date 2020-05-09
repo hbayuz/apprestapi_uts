@@ -15,6 +15,8 @@ module.exports = function (app) {
         .post(jsonku.tambahMontir);
     app.route('/ubahmontir')
         .put(jsonku.ubahMontir);
+    app.route('/hapusmontir')
+        .delete(jsonku.hapusMontir);
 
     //sparepart
     app.route('/tampilsparepart')
@@ -25,4 +27,6 @@ module.exports = function (app) {
         .post(jsonku.tambahSparepart);
     app.route('/ubahsparepart')
         .put(jsonku.ubahSparepart);
+    app.route('/hapussparepart')
+        .delete(jsonku.hapusSparepart);
 }

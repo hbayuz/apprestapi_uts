@@ -94,8 +94,8 @@ exports.ubahMontir = function (req, res) {
     var Nama_montir = req.body.Nama_montir;
     var harga_perjam = req.body.harga_perjam;
 
-    connection.query('UPDATE t_montir SET Nama_montir=?, harga_perjam=? WHERE id_montir=?', 
-    [Nama_montir, harga_perjam, id],
+    connection.query('UPDATE t_montir SET Nama_montir=?, harga_perjam=? WHERE id_montir=?',
+        [Nama_montir, harga_perjam, id],
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
@@ -106,19 +106,45 @@ exports.ubahMontir = function (req, res) {
 };
 
 //mengubah data sparepart berdasarkan id
-exports.ubahSparepart = function (req,res) {
+exports.ubahSparepart = function (req, res) {
     var id = req.body.id_sparepart
     var nama_sparepart = req.body.nama_sparepart;
     var harga_sparepart = req.body.harga_sparepart;
     var satuan = req.body.satuan;
 
-    connection.query('UPDATE t_sparepart SET nama_sparepart=?, harga_sparepart=?, satuan=? WHERE id_sparepart=?', 
-    [nama_sparepart, harga_sparepart, satuan, id],
+    connection.query('UPDATE t_sparepart SET nama_sparepart=?, harga_sparepart=?, satuan=? WHERE id_sparepart=?',
+        [nama_sparepart, harga_sparepart, satuan, id],
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
             } else {
                 response.ok("Berhasil Ubah Data Sparepart!", res)
+            }
+        });
+};
+
+//menghapus data montir berdasarkan id
+exports.hapusMontir = function (req, res) {
+    var id = req.body.id_montir;
+    connection.query('DELETE FROM t_montir WHERE id_montir=?', [id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Hapus Data Montir!", res)
+            }
+        });
+};
+
+//menghapus data sparepart berdasarkan id
+exports.hapusSparepart = function (req, res) {
+    var id = req.body.id_sparepart;
+    connection.query('DELETE FROM t_sparepart WHERE id_sparepart=?', [id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Berhasil Hapus Data Sparepart!", res)
             }
         });
 };
