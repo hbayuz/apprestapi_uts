@@ -29,4 +29,8 @@ module.exports = function (app) {
         .put(jsonku.ubahSparepart);
     app.route('/hapussparepart')
         .delete(jsonku.hapusSparepart);
+
+    //nested
+    app.route('/tampiltotal')
+        .get(jsonku.tampilgroupsparepart);
 }
