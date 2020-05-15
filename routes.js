@@ -35,8 +35,4 @@ module.exports = function (app) {
 
     app.route('/hapussparepart')
         .delete(jsonku.hapusSparepart);
-
-    //nested
-    app.route('/tampiltotal')
-        .get(jsonku.tampilgroupsparepart);
 }

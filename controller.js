@@ -88,6 +88,26 @@ exports.tambahSparepart = function (req, res) {
         });
 };
 
+//menambahkan data servis
+exports.tambahdataservis = function (req, res) {
+    var tgl_servis = req.body.tgl_servis;
+    var id_user = req.body.id_user;
+    var id_montir = req.body.id_montir;
+    var id_sparepart = req.body.id_sparepart;
+    var jumlah_sparepart = req.body.jumlah_sparepart;
+    
+    connection.query('INSERT INTO t_servis (tgl_servis,id_user,id_montir,id_sparepart,jumlah_sparepart) VALUES (?,?,?,?,?)',
+        [tgl_servis, id_user, id_montir, id_sparepart, jumlah_sparepart],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Input Data Servis Sukses", res);
+            }
+        });
+};
+
 //mengubah data montir berdasarkan id
 exports.ubahMontir = function (req, res) {
     var id = req.body.id_montir
