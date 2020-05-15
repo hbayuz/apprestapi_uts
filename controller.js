@@ -55,6 +55,39 @@ exports.tampilsemuasparepartberdasarkanid = function (req, res) {
         });
 };
 
+//menambahkan data servis
+exports.tambahdataservis = function (req, res) {
+    var tgl_servis = req.body.tgl_servis;
+    var id_user = req.body.id_user;
+    var id_montir = req.body.id_montir;
+    var id_sparepart = req.body.id_sparepart;
+    var jumlah_sparepart = req.body.jumlah_sparepart;
+    
+    connection.query('INSERT INTO t_servis (tgl_servis,id_user,id_montir,id_sparepart,jumlah_sparepart) VALUES (?,?,?,?,?)',
+        [tgl_servis, id_user, id_montir, id_sparepart, jumlah_sparepart],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Input Data Servis Sukses", res);
+            }
+        });
+};
+
+//menampilkan total biaya
+exports.tampilgroupsparepart = function (req, res) {
+    connection.query('SELECT t_user.nama_user, t_servis.tgl_servis, t_montir.Nama_montir, t_sparepart.nama_sparepart, t_sparepart.harga_sparepart, t_servis.jumlah_sparepart, (harga_perjam + jumlah_sparepart * harga_sparepart) AS total_harga FROM t_servis JOIN t_user JOIN t_montir JOIN t_sparepart WHERE t_servis.id_user = t_user.id_user AND t_servis.id_montir = t_montir.id_montir AND t_servis.id_sparepart = t_sparepart.id_sparepart ORDER BY t_user.id_user ',
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.oknested(rows, res);
+            }
+        }
+    )
+};
+
 //menambahkan data montir
 exports.tambahMontir = function (req, res) {
     var Nama_montir = req.body.Nama_montir;
@@ -88,22 +121,58 @@ exports.tambahSparepart = function (req, res) {
         });
 };
 
-//menambahkan data servis
-exports.tambahdataservis = function (req, res) {
-    var tgl_servis = req.body.tgl_servis;
-    var id_user = req.body.id_user;
-    var id_montir = req.body.id_montir;
-    var id_sparepart = req.body.id_sparepart;
-    var jumlah_sparepart = req.body.jumlah_sparepart;
-    
-    connection.query('INSERT INTO t_servis (tgl_servis,id_user,id_montir,id_sparepart,jumlah_sparepart) VALUES (?,?,?,?,?)',
-        [tgl_servis, id_user, id_montir, id_sparepart, jumlah_sparepart],
+//menambahkan data user
+exports.tambahuser = function (req, res) {
+    var nama_user = req.body.nama_user;
+    var email = req.body.email;
+    var password = req.body.password;
+    var level = req.body.level;
+
+    connection.query('INSERT INTO t_user (nama_user,email,password,level) VALUES (?,?,?,?)',
+    [nama_user,email,password,level],
 
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
             } else {
-                response.ok("Input Data Servis Sukses", res);
+                response.ok("Input User Sukses", res);
+            }
+        });
+};
+
+//menambahkan data level
+exports.tambahlevel = function (req, res) {
+    var nama_level = req.body.nama_level;    
+
+    connection.query('INSERT INTO t_level (nama_level) VALUES (?)',
+    [nama_level],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Level Berhasil Di tambahkan", res);
+            }
+        });
+};
+
+//menambahkan data service
+exports.tambahservis = function (req, res) {
+    var tgl_servis = req.body.tgl_servis;
+    var id_user = req.body.id_user;
+    var id_montir = req.body.id_montir;
+    var id_sparepart = req.body.id_sparepart; 
+    var jumlah_sparepart = req.body.jumlah_sparepart;
+       
+
+    connection.query('INSERT INTO t_servis (tgl_servis,id_user,id_montir,id_sparepart,jumlah_sparepart) VALUES (?,?,?,?,?)',
+    [tgl_servis, id_user, id_montir, id_sparepart, jumlah_sparepart],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Data Servis Berhasil di Tambahkan", res);
             }
         });
 };
@@ -169,15 +238,3 @@ exports.hapusSparepart = function (req, res) {
         });
 };
 
-//menampilkan total biaya
-exports.tampilgroupsparepart = function (req, res) {
-    connection.query('SELECT t_user.nama_user, t_servis.tgl_servis, t_montir.Nama_montir, t_sparepart.nama_sparepart, t_sparepart.harga_sparepart, t_servis.jumlah_sparepart, (harga_perjam + jumlah_sparepart * harga_sparepart) AS total_harga FROM t_servis JOIN t_user JOIN t_montir JOIN t_sparepart WHERE t_servis.id_user = t_user.id_user AND t_servis.id_montir = t_montir.id_montir AND t_servis.id_sparepart = t_sparepart.id_sparepart ORDER BY t_user.id_user ',
-        function (error, rows, fields) {
-            if (error) {
-                console.log(error);
-            } else {
-                response.oknested(rows, res);
-            }
-        }
-    )
-}
