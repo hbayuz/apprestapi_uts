@@ -19,4 +19,10 @@ router.post('/user/admin/input/user', verifikasi.verifikasi1(), control.tambahus
 router.post('/user/admin/input/level', verifikasi.verifikasi1(), control.tambahlevel);
 router.post('/user/admin/input/servis', verifikasi.verifikasi1(), control.tambahservis);
 
+router.put('/user/admin/ubah/montir', verifikasi.verifikasi1(), control.ubahMontir);
+router.put('/user/admin/ubah/sparepart', verifikasi.verifikasi1(), control.ubahSparepart);
+router.put('/user/admin/ubah/user', verifikasi.verifikasi1(), control.ubahuser);
+router.put('/user/admin/ubah/level', verifikasi.verifikasi1(), control.ubahlevel);
+router.put('/user/admin/ubah/servis', verifikasi.verifikasi1(), control.ubahservis);
+
 module.exports = router;
