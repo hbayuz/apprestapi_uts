@@ -273,8 +273,8 @@ exports.ubahservis = function (req, res) {
 
 //menghapus data montir berdasarkan id
 exports.hapusMontir = function (req, res) {
-    var id = req.body.id_montir;
-    connection.query('DELETE FROM t_montir WHERE id_montir=?', [id],
+    var id_montir = req.body.id_montir;
+    connection.query('DELETE FROM t_montir WHERE id_montir=?', [id_montir],
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
@@ -286,8 +286,8 @@ exports.hapusMontir = function (req, res) {
 
 //menghapus data sparepart berdasarkan id
 exports.hapusSparepart = function (req, res) {
-    var id = req.body.id_sparepart;
-    connection.query('DELETE FROM t_sparepart WHERE id_sparepart=?', [id],
+    var id_sparepart = req.body.id_sparepart;
+    connection.query('DELETE FROM t_sparepart WHERE id_sparepart=?', [id_sparepart],
         function (error, rows, fields) {
             if (error) {
                 console.log(error);
@@ -297,3 +297,50 @@ exports.hapusSparepart = function (req, res) {
         });
 };
 
+//menghapus data user berdasarkan id
+exports.hapususer = function (req, res) {
+    var id_user = req.body.id_user;    
+
+    connection.query('DELETE FROM t_user WHERE id_user=?',
+    [id_user],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Data User Berhasil Dihapus", res);
+            }
+        });
+};
+
+//menghapus data level berdasarkan id
+exports.hapuslevel = function (req, res) {
+    var id_level = req.body.id_level;    
+
+    connection.query('DELETE FROM t_level WHERE id_level=?',
+    [id_level],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Data Level Berhasil Dihapus", res);
+            }
+        });
+};
+
+//menghapus data servis berdasarkan id
+exports.hapusservis = function (req, res) {
+    var id_servis = req.body.id_servis;    
+
+    connection.query('DELETE FROM t_servis WHERE id_servis=?',
+    [id_servis],
+
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error);
+            } else {
+                response.ok("Data Servis Berhasil Dihapus", res);
+            }
+        });
+};
